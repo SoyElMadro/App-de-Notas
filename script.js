@@ -27,9 +27,21 @@ function createNote() {
     const titleElement = document.createElement("h3");
     titleElement.textContent = noteTitleText;
     
+    
+
+    const editNote = document.createElement("i");
+    editNote.classList.add('bx', 'bxs-edit');
+    editNote.addEventListener("click", () => {
+      console.log("Editando...")
+      noteInput.disabled = false;
+    })
+
     if (colorPicker.value === "#000000") {
       noteContent.style.color = "#ffffff";
-      titleElement.style.color = '#ffffff'
+      titleElement.style.color = '#ffffff';
+      editNote.classList.remove('bxs-edit');
+      editNote.style.backgroundColor = '#fff'
+      editNote.classList.add('bx-edit');
     }
 
     const deleteBtn = document.createElement("button");
@@ -38,10 +50,11 @@ function createNote() {
       note.remove();
     });
     
-    noteHeader.appendChild(titleElement)
+    noteHeader.appendChild(titleElement);
+    noteHeader.appendChild(editNote);
     noteFooter.appendChild(deleteBtn);
     
-    note.appendChild(noteHeader)
+    note.appendChild(noteHeader);
     note.appendChild(noteContent);
     note.appendChild(noteFooter);
     
