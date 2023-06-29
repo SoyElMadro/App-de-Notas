@@ -10,13 +10,26 @@ h1 {
 }
 
 .note-container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 20px auto;
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+input[type="color"] {
+  width: 50px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="color"]:hover {
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.8);
+}
+
 
 .note-header {
   display: flex;
