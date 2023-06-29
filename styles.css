@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #149c6f;
+}
+
+h1 {
+  text-align: center;
+  color: #dfdfdf;
+  font-size: 3em;
+}
+
+.note-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.note-header i {
+  width: 60%;
+}
+
+.note-header h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button-div button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: .1em;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-div button:hover {
+  background-color: #2fb033;
+}
+
+#note-title {
+  width: 98%;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: .2em;
+}
+
+#note-input {
+  max-width: 98%;
+  min-width: 98%;
+  height: 200px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#notes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+#notes-container h1 {
+  margin: 25px 100%;
+}
+
+.note {
+  margin-bottom: 20px;
+  max-width: 75%;
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+
+.note-header h3 {
+  margin: 0;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: center;
+}
+
+.note p {
+  margin-bottom: 30px;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.note-footer button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.note-footer button:hover { background-color: #f4291b; }
