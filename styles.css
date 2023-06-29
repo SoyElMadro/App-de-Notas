@@ -38,6 +38,10 @@ h1 {
   cursor: pointer;
 }
 
+.note-header i.bx-x-circle {
+  font-size: 1.4em;
+}
+
 .note-header h2 {
   margin: 0;
   font-size: 19px;
