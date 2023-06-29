@@ -26,23 +26,23 @@ function createNote() {
     
     const titleElement = document.createElement("h3");
     titleElement.textContent = noteTitleText;
-    
-    
 
-    const editNote = document.createElement("i");
-    editNote.classList.add('bx', 'bxs-edit');
-    editNote.addEventListener("click", () => {
-      console.log("Editando...")
-      noteInput.disabled = false;
-    })
-
-    if (colorPicker.value === "#000000") {
-      noteContent.style.color = "#ffffff";
-      titleElement.style.color = '#ffffff';
-      editNote.classList.remove('bxs-edit');
-      editNote.style.backgroundColor = '#fff'
-      editNote.classList.add('bx-edit');
-    }
+    const editNoteIcon = document.createElement("i");
+    editNoteIcon.classList.add("bx", "bxs-edit");
+    editNoteIcon.addEventListener("click", () => {
+      if (note.classList.contains("editing")) {
+        // Finalizar edición
+        note.classList.remove("editing");
+        titleElement.contentEditable = false;
+        noteContent.contentEditable = false;
+      } else {
+        // Iniciar edición
+        note.classList.add("editing");
+        titleElement.contentEditable = true;
+        noteContent.contentEditable = true;
+        titleElement.focus();
+      }
+    });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Eliminar";
@@ -51,7 +51,7 @@ function createNote() {
     });
     
     noteHeader.appendChild(titleElement);
-    noteHeader.appendChild(editNote);
+    noteHeader.appendChild(editNoteIcon);
     noteFooter.appendChild(deleteBtn);
     
     note.appendChild(noteHeader);
@@ -61,6 +61,7 @@ function createNote() {
     notesContainer.appendChild(note);
     
     noteInput.value = "";
+    noteTitle.value = "";
     colorPicker.value = "#ffffff";
   }
 }
