@@ -28,21 +28,31 @@ function createNote() {
     titleElement.textContent = noteTitleText;
 
     const editNoteIcon = document.createElement("i");
-    editNoteIcon.classList.add("bx", "bxs-edit");
+    editNoteIcon.classList.add('bx', 'bxs-edit');
     editNoteIcon.addEventListener("click", () => {
       if (note.classList.contains("editing")) {
-        // Finalizar edición
         note.classList.remove("editing");
+        editNoteIcon.classList.remove("bx-x-circle");
+        editNoteIcon.classList.add("bxs-edit");
         titleElement.contentEditable = false;
         noteContent.contentEditable = false;
       } else {
-        // Iniciar edición
         note.classList.add("editing");
+        editNoteIcon.classList.remove("bxs-edit");
+        editNoteIcon.classList.add("bx-x-circle");
         titleElement.contentEditable = true;
         noteContent.contentEditable = true;
         titleElement.focus();
       }
     });
+
+    if (colorPicker.value === "#000000") {
+      noteContent.style.color = "#ffffff";
+      titleElement.style.color = '#ffffff';
+      editNoteIcon.classList.remove('bxs-edit');
+      editNoteIcon.style.backgroundColor = '#fff'
+      editNoteIcon.classList.add('bx-edit');
+    }
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Eliminar";
@@ -61,7 +71,6 @@ function createNote() {
     notesContainer.appendChild(note);
     
     noteInput.value = "";
-    noteTitle.value = "";
     colorPicker.value = "#ffffff";
   }
 }
