@@ -16,13 +16,14 @@ createBtn.addEventListener("click", createNote);
 function createNote() {
   const noteTitleText = noteTitle.value.trim();
   const noteText = noteInput.value.trim();
+  const noteColor = colorPicker.value;
   
   if (noteTitleText !== "" && noteText !== "") {
     const note = {
-      ID: generateUniqueId(),
+      id: generateUniqueId(),
       title: noteTitleText,
       content: noteText,
-      color: colorPicker.value,
+      color: noteColor,
     };
 
     notes.push(note);
@@ -36,65 +37,65 @@ function createNote() {
 
 function addNoteToContainer(note) {
   const noteElement = document.createElement("div");
-    noteElement.className = "note";
-    noteElement.style.backgroundColor = colorPicker.value;
+  noteElement.className = "note";
+  noteElement.style.backgroundColor = note.color;
     
-    const noteContent = document.createElement("p");
-    noteContent.textContent = note.content;
+  const noteContent = document.createElement("p");
+  noteContent.textContent = note.content;
     
-    const noteHeader = document.createElement("div");
-    noteHeader.className = "note-header";
+  const noteHeader = document.createElement("div");
+  noteHeader.className = "note-header";
     
-    const noteFooter = document.createElement("div");
-    noteFooter.className = "note-footer";
+  const noteFooter = document.createElement("div");
+  noteFooter.className = "note-footer";
     
-    const titleElement = document.createElement("h3");
-    titleElement.textContent = note.title;
+  const titleElement = document.createElement("h3");
+  titleElement.textContent = note.title;
 
-    const editNoteIcon = document.createElement("i");
-    editNoteIcon.classList.add('bx', 'bxs-edit');
-    editNoteIcon.addEventListener("click", () => {
-      if (noteElement.classList.contains("editing")) {
-        noteElement.classList.remove("editing");
-        editNoteIcon.classList.remove("bx-x-circle");
-        editNoteIcon.classList.add("bxs-edit");
-        titleElement.contentEditable = false;
-        noteContent.contentEditable = false;
-      } else {
-        noteElement.classList.add("editing");
-        editNoteIcon.classList.remove("bxs-edit");
-        editNoteIcon.classList.add("bx-x-circle");
-        titleElement.contentEditable = true;
-        noteContent.contentEditable = true;
-        titleElement.focus();
-      }
-    });
-
-    if (colorPicker.value === "#000000") {
-      noteContent.style.color = "#ffffff";
-      titleElement.style.color = '#ffffff';
-      editNoteIcon.classList.remove('bxs-edit');
-      editNoteIcon.style.backgroundColor = '#fff'
-      editNoteIcon.classList.add('bx-edit');
+  const editNoteIcon = document.createElement("i");
+  editNoteIcon.classList.add('bx', 'bxs-edit');
+  editNoteIcon.addEventListener("click", () => {
+    if (noteElement.classList.contains("editing")) {
+      noteElement.classList.remove("editing");
+      editNoteIcon.classList.remove("bx-x-circle");
+      editNoteIcon.classList.add("bxs-edit");
+      titleElement.contentEditable = false;
+      noteContent.contentEditable = false;
+    } else {
+      noteElement.classList.add("editing");
+      editNoteIcon.classList.remove("bxs-edit");
+      editNoteIcon.classList.add("bx-x-circle");
+      titleElement.contentEditable = true;
+      noteContent.contentEditable = true;
+      titleElement.focus();
     }
+  });
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Eliminar";
-    deleteBtn.addEventListener("click", (e) => {
-      noteElement.remove();
-      deleteNoteFromStorage(e.target.parentNode.parentNode.id);
-    });
+  if (note.color === "#000000") {
+    noteContent.style.color = "#ffffff";
+    titleElement.style.color = '#ffffff';
+    editNoteIcon.classList.remove('bxs-edit');
+    editNoteIcon.style.backgroundColor = '#fff'
+    editNoteIcon.classList.add('bx-edit');
+  }
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Eliminar";
+  deleteBtn.addEventListener("click", (e) => {
+    noteElement.remove();
+    deleteNoteFromStorage(note.id);
+  });
     
-    noteHeader.appendChild(titleElement);
-    noteHeader.appendChild(editNoteIcon);
-    noteFooter.appendChild(deleteBtn);
+  noteHeader.appendChild(titleElement);
+  noteHeader.appendChild(editNoteIcon);
+  noteFooter.appendChild(deleteBtn);
     
-    noteElement.appendChild(noteHeader);
-    noteElement.appendChild(noteContent);
-    noteElement.appendChild(noteFooter);
-    noteElement.setAttribute("ID", note.ID);
+  noteElement.appendChild(noteHeader);
+  noteElement.appendChild(noteContent);
+  noteElement.appendChild(noteFooter);
+  noteElement.setAttribute("id", note.id);
     
-    notesContainer.appendChild(noteElement);
+  notesContainer.appendChild(noteElement);
 }
 
 function saveNotes() {
@@ -112,6 +113,6 @@ function generateUniqueId() {
 }
 
 function deleteNoteFromStorage(noteId) {
-  notes = notes.filter((note) => note.ID !== noteId);
+  notes = notes.filter((note) => note.id !== noteId);
   saveNotes();
 }
