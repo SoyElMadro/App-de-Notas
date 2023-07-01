@@ -19,6 +19,7 @@ function createNote() {
   
   if (noteTitleText !== "" && noteText !== "") {
     const note = {
+      ID: generateUniqueId(),
       title: noteTitleText,
       content: noteText,
       color: colorPicker.value,
@@ -79,8 +80,9 @@ function addNoteToContainer(note) {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Eliminar";
-    deleteBtn.addEventListener("click", () => {
+    deleteBtn.addEventListener("click", (e) => {
       noteElement.remove();
+      deleteNoteFromStorage(e.target.parentNode.parentNode.id);
     });
     
     noteHeader.appendChild(titleElement);
@@ -90,6 +92,7 @@ function addNoteToContainer(note) {
     noteElement.appendChild(noteHeader);
     noteElement.appendChild(noteContent);
     noteElement.appendChild(noteFooter);
+    noteElement.setAttribute("ID", note.ID);
     
     notesContainer.appendChild(noteElement);
 }
@@ -102,4 +105,13 @@ function restoreNotes() {
   notes.forEach((note) => {
     addNoteToContainer(note);
   });
+}
+
+function generateUniqueId() {
+  return Date.now().toString(36) + Math.random().toString(36);
+}
+
+function deleteNoteFromStorage(noteId) {
+  notes = notes.filter((note) => note.ID !== noteId);
+  saveNotes();
 }
